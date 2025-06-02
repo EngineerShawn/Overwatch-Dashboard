@@ -2,7 +2,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Discord BOT Dashboard</title>
+  <title>Overwatch Dashboard</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel="stylesheet" href="../login/style.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
@@ -10,8 +10,11 @@
 <body>
 <!-- partial:index.partial.html -->
 <div id="particles-js"></div>
+<button id="theme-toggle" class="theme-toggle-button">
+  <i class="fas fa-sun"></i> <!-- Moon icon for dark mode, Sun for light -->
+</button>
 
-<div class="text">
+<div class="login-container"> <!-- Changed class from .text to .login-container -->
         <% if(error != ''){ %>
             <div class="alert">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -24,10 +27,10 @@
               <%= success %>
           </div>
       <% } %>    
-    <h1 class="centre">Welcome: <%=user%></h1>
+    <h1>Welcome: <%=user%></h1> <!-- Removed .centre class, handled by .login-container -->
     <img src="<%=avatar%>">
-    <h4 class="centre">Discord BOT Dashboard<br>Created by: LachlanDev#8014</h4>
-	<div class="centre">
+    <h4>Overwatch Dashboard<br>Created by: EngineerShawn</h4> <!-- Removed .centre class -->
+	<div> <!-- Removed .centre class -->
     <a href="/login/api"><button class="button"><span>Login </span></button></a>
     </div>
 </div>

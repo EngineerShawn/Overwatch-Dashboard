@@ -1,0 +1,530 @@
+:root {
+  /* Light Theme */
+  --bg-color-light: #f4f7f6; /* Slightly off-white, softer than pure white */
+  --surface-color-light: #ffffff;
+  --text-color-light: #172b4d; /* Dark blue/gray for primary text */
+  --text-muted-light: #6b778c; /* Softer gray for secondary text */
+  --accent-color-light: #5e72e4; /* Existing primary blue */
+  --accent-hover-light: #4a5cc7;
+  --border-color-light: #dfe1e6; /* Light gray for borders */
+  --shadow-color-light: rgba(9, 30, 66, 0.15); /* Softer, more diffused shadow */
+  --sidebar-bg-light: #ffffff;
+  --sidebar-text-light: #42526e;
+  --sidebar-active-bg-light: #e9f2ff;
+  --sidebar-active-text-light: var(--accent-color-light);
+  --header-bg-light: #ffffff;
+
+  /* Dark Theme */
+  --bg-color-dark: #0d1117; /* Very dark gray, GitHub dark mode style */
+  --surface-color-dark: #161b22; /* Slightly lighter for surfaces */
+  --text-color-dark: #c9d1d9; /* Light gray for primary text */
+  --text-muted-dark: #8b949e;
+  --accent-color-dark: #79c0ff; /* Brighter blue for dark mode accents */
+  --accent-hover-dark: #58a6ff;
+  --border-color-dark: #30363d; /* Darker gray for borders */
+  --shadow-color-dark: rgba(0, 0, 0, 0.4);
+  --sidebar-bg-dark: #161b22;
+  --sidebar-text-dark: #8b949e;
+  --sidebar-active-bg-dark: #222b38; /* Darker active background */
+  --sidebar-active-text-dark: var(--accent-color-dark);
+  --header-bg-dark: #161b22;
+
+  /* Shared Variables */
+  --border-radius-sm: 6px;
+  --border-radius-md: 10px;
+  --border-radius-lg: 14px;
+  --spacing-unit: 8px;
+  --font-family-sans: "Fira Sans", "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --transition-duration: 0.25s;
+  --transition-timing: ease-in-out;
+}
+
+/* Basic Reset & Body Styling */
+body {
+  font-family: var(--font-family-sans);
+  background-color: var(--bg-color-light);
+  color: var(--text-color-light);
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  transition: background-color var(--transition-duration) var(--transition-timing), color var(--transition-duration) var(--transition-timing);
+}
+
+body.dark-mode {
+  background-color: var(--bg-color-dark);
+  color: var(--text-color-dark);
+}
+
+/* App Container */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+.app-header {
+  background-color: var(--header-bg-light);
+  border-bottom: 1px solid var(--border-color-light);
+  box-shadow: 0 2px 4px var(--shadow-color-light);
+  transition: background-color var(--transition-duration) var(--transition-timing), border-color var(--transition-duration) var(--transition-timing);
+  z-index: 100;
+}
+body.dark-mode .app-header {
+  background-color: var(--header-bg-dark);
+  border-bottom-color: var(--border-color-dark);
+}
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 calc(var(--spacing-unit) * 2);
+  height: 60px;
+}
+.top-bar-brand h5 {
+  margin: 0;
+  font-weight: 600;
+  color: inherit;
+}
+.btn-account {
+  background: none;
+  border: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--spacing-unit) * 1);
+  border-radius: var(--border-radius-md);
+}
+.btn-account:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+body.dark-mode .btn-account:hover {
+  background-color: rgba(255,255,255,0.05);
+}
+.user-avatar img {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--border-color-light);
+}
+body.dark-mode .user-avatar img {
+  border-color: var(--border-color-dark);
+}
+.account-summary {
+  margin-left: var(--spacing-unit);
+}
+.account-name {
+  font-weight: 500;
+}
+.account-description {
+  font-size: 0.85em;
+  color: var(--text-muted-light);
+}
+body.dark-mode .account-description {
+  color: var(--text-muted-dark);
+}
+.dropdown-menu {
+  background-color: var(--surface-color-light);
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 4px 12px var(--shadow-color-light);
+  padding: var(--spacing-unit) 0;
+}
+body.dark-mode .dropdown-menu {
+  background-color: var(--surface-color-dark);
+  border-color: var(--border-color-dark);
+  box-shadow: 0 4px 12px var(--shadow-color-dark);
+}
+.dropdown-item {
+  color: var(--text-color-light);
+  padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+}
+.dropdown-item:hover {
+  background-color: var(--accent-color-light);
+  color: white;
+}
+body.dark-mode .dropdown-item {
+  color: var(--text-color-dark);
+}
+body.dark-mode .dropdown-item:hover {
+  background-color: var(--accent-color-dark);
+  color: var(--text-color-light); /* Or a specific light color for dark accent hover */
+}
+
+/* Sidebar */
+.app-aside {
+  background-color: var(--sidebar-bg-light);
+  border-right: 1px solid var(--border-color-light);
+  width: 250px; /* Adjust as needed */
+  transition: background-color var(--transition-duration) var(--transition-timing), border-color var(--transition-duration) var(--transition-timing);
+}
+body.dark-mode .app-aside {
+  background-color: var(--sidebar-bg-dark);
+  border-right-color: var(--border-color-dark);
+}
+.aside-menu {
+  padding-top: calc(var(--spacing-unit) * 2);
+}
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.menu-item .menu-link {
+  display: flex;
+  align-items: center;
+  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2.5);
+  color: var(--sidebar-text-light);
+  text-decoration: none;
+  border-radius: var(--border-radius-md);
+  margin: 0 var(--spacing-unit);
+  transition: background-color var(--transition-duration) var(--transition-timing), color var(--transition-duration) var(--transition-timing);
+}
+body.dark-mode .menu-item .menu-link {
+  color: var(--sidebar-text-dark);
+}
+.menu-item .menu-link:hover {
+  background-color: var(--sidebar-active-bg-light);
+  color: var(--sidebar-active-text-light);
+}
+body.dark-mode .menu-item .menu-link:hover {
+  background-color: var(--sidebar-active-bg-dark);
+  color: var(--sidebar-active-text-dark);
+}
+.menu-item.has-active .menu-link {
+  background-color: var(--sidebar-active-bg-light);
+  color: var(--sidebar-active-text-light);
+  font-weight: 500;
+}
+body.dark-mode .menu-item.has-active .menu-link {
+  background-color: var(--sidebar-active-bg-dark);
+  color: var(--sidebar-active-text-dark);
+}
+.menu-icon {
+  margin-right: calc(var(--spacing-unit) * 1.5);
+  width: 20px;
+  text-align: center;
+}
+
+/* Main Content Area */
+.app-main {
+  flex-grow: 1;
+  padding: calc(var(--spacing-unit) * 3);
+  overflow-y: auto;
+}
+.page-title-bar {
+  margin-bottom: calc(var(--spacing-unit) * 3);
+}
+.page-title-bar .lead {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-unit);
+}
+.page-title-bar .lead .font-weight-bold {
+  font-weight: 600 !important;
+}
+.page-title-bar .text-muted {
+  color: var(--text-muted-light) !important;
+}
+body.dark-mode .page-title-bar .text-muted {
+  color: var(--text-muted-dark) !important;
+}
+
+/* Cards */
+.card {
+  background-color: var(--surface-color-light);
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 1px 3px var(--shadow-color-light);
+  margin-bottom: calc(var(--spacing-unit) * 3);
+  transition: background-color var(--transition-duration) var(--transition-timing), border-color var(--transition-duration) var(--transition-timing);
+}
+body.dark-mode .card {
+  background-color: var(--surface-color-dark);
+  border-color: var(--border-color-dark);
+}
+.card-header {
+  background-color: transparent; /* Or a slightly different surface color */
+  border-bottom: 1px solid var(--border-color-light);
+  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
+  font-weight: 500;
+  border-top-left-radius: var(--border-radius-lg);
+  border-top-right-radius: var(--border-radius-lg);
+}
+body.dark-mode .card-header {
+  border-bottom-color: var(--border-color-dark);
+}
+.card-body {
+  padding: calc(var(--spacing-unit) * 2);
+}
+
+/* Buttons (General Bootstrap Overrides for NextUI feel) */
+.btn {
+  border-radius: var(--border-radius-md);
+  padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 2.5);
+  font-weight: 500;
+  transition: all var(--transition-duration) var(--transition-timing);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.btn-primary {
+  background-color: var(--accent-color-light);
+  border-color: var(--accent-color-light);
+  color: white;
+}
+.btn-primary:hover {
+  background-color: var(--accent-hover-light);
+  border-color: var(--accent-hover-light);
+  color: white;
+}
+body.dark-mode .btn-primary {
+  background-color: var(--accent-color-dark);
+  border-color: var(--accent-color-dark);
+}
+body.dark-mode .btn-primary:hover {
+  background-color: var(--accent-hover-dark);
+  border-color: var(--accent-hover-dark);
+}
+/* Add similar overrides for .btn-info, .btn-success, .btn-warning, .btn-danger if used */
+
+/* Metrics */
+.metric {
+  background-color: var(--surface-color-light);
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius-md);
+  padding: calc(var(--spacing-unit) * 2);
+  text-align: center;
+  box-shadow: 0 1px 3px var(--shadow-color-light);
+}
+body.dark-mode .metric {
+  background-color: var(--surface-color-dark);
+  border-color: var(--border-color-dark);
+}
+.metric-label {
+  font-size: 0.9em;
+  color: var(--text-muted-light);
+  margin-bottom: var(--spacing-unit);
+}
+body.dark-mode .metric-label {
+  color: var(--text-muted-dark);
+}
+.metric-value {
+  font-size: 1.75em;
+  font-weight: 600;
+  color: var(--text-color-light);
+}
+body.dark-mode .metric-value {
+  color: var(--text-color-dark);
+}
+.metric-value sub {
+  font-size: 0.6em;
+  margin-right: var(--spacing-unit) * 0.5;
+}
+
+/* Alerts (Bootstrap Overrides) */
+.alert {
+  border-radius: var(--border-radius-md);
+  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
+  border-width: 1px;
+  border-style: solid;
+}
+/* Example for alert-warning, adapt for others */
+.alert-warning {
+  background-color: #fff3cd; /* Bootstrap default, adjust with variables if needed */
+  border-color: #ffeeba;
+  color: #856404;
+}
+body.dark-mode .alert-warning {
+  background-color: #332701;
+  border-color: #664d03;
+  color: #ffda6a;
+}
+
+/* Footer */
+.app-footer {
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 3);
+  border-top: 1px solid var(--border-color-light);
+  background-color: var(--surface-color-light); /* Or body background */
+  color: var(--text-muted-light);
+  font-size: 0.9em;
+  text-align: center;
+}
+body.dark-mode .app-footer {
+  border-top-color: var(--border-color-dark);
+  background-color: var(--surface-color-dark);
+  color: var(--text-muted-dark);
+}
+.app-footer .list-inline-item a {
+  color: var(--text-muted-light);
+}
+body.dark-mode .app-footer .list-inline-item a {
+  color: var(--text-muted-dark);
+}
+.app-footer .list-inline-item a:hover {
+  color: var(--accent-color-light);
+}
+body.dark-mode .app-footer .list-inline-item a:hover {
+  color: var(--accent-color-dark);
+}
+
+/* Theme Toggle Button (re-use from login style or adapt) */
+.theme-toggle-button {
+  background-color: var(--surface-color-light);
+  color: var(--text-color-light);
+  border: 1px solid var(--border-color-light);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--shadow-color-light);
+  transition: all var(--transition-duration) var(--transition-timing);
+  z-index: 1000; /* Ensure it's on top */
+  /* Position it within the header as needed */
+}
+
+body.dark-mode .theme-toggle-button {
+  background-color: var(--surface-color-dark);
+  color: var(--text-color-dark);
+  border-color: var(--border-color-dark);
+  box-shadow: 0 2px 8px var(--shadow-color-dark);
+}
+
+.theme-toggle-button:hover {
+  transform: scale(1.1);
+}
+
+/* Ensure app takes full height for sidebar */
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+.app-aside {
+    /* ... existing styles ... */
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
+}
+.app-main {
+    flex-grow: 1;
+    display: flex; /* Allow footer to be pushed down */
+    flex-direction: column; /* Stack content and footer */
+}
+.wrapper {
+    flex-grow: 1; /* Make content area take available space */
+}
+
+/* Hamburger */
+.hamburger {
+    padding: 10px;
+    display: inline-block;
+    cursor: pointer;
+    transition-property: opacity, filter;
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
+    font: inherit;
+    color: inherit;
+    text-transform: none;
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    overflow: visible; }
+
+/* Responsive: Adjust sidebar for smaller screens if Looper's JS handles toggling */
+@media (max-width: 767.98px) { /* Corresponds to md breakpoint in Looper */
+  .app-aside.app-aside-expand-md.app-aside-light {
+    /* Styles for when sidebar is collapsed or overlayed, if needed */
+    /* Looper's theme.min.js likely handles the expand/collapse behavior */
+  }
+}
+
+/* Remove default Looper theme skin if it conflicts */
+body[data-skin="default"] {
+    /* Potentially override specific Looper styles here if they are too strong */
+}
+
+/* Ensure FontAwesome icons are sized appropriately if not already */
+.menu-icon.fas, .dropdown-icon.oi {
+    font-size: 1.1em; /* Adjust as needed */
+}
+
+/* Fix for dropdown arrow positioning if needed */
+.dropdown-menu .dropdown-arrow {
+    /* Default Looper styles might be fine, or adjust here */
+}
+
+
+/* Specific Looper classes that might need slight adjustments */
+.top-bar-item-right .dropdown {
+    margin-left: var(--spacing-unit);
+}
+
+.metric-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: calc(-1 * var(--spacing-unit));
+    margin-right: calc(-1 * var(--spacing-unit));
+}
+.metric-row > .col, .metric-row > [class*="col-"] {
+    padding-left: var(--spacing-unit);
+    padding-right: var(--spacing-unit);
+}
+
+/* Ensure the main content area is scrollable if content overflows */
+.app-main .wrapper {
+    overflow-y: auto; /* Or just let .app-main handle it */
+}
+
+/* Adjust padding for .page-section if needed */
+.page-section {
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+/* Make sure .section-block doesn't add excessive margins if .card already has them */
+.section-block {
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+/* If Looper's default font is too strong, ensure ours takes precedence */
+body, .app, h1, h2, h3, h4, h5, h6, p, .menu-text, .account-name, .account-description {
+    font-family: var(--font-family-sans) !important; /* Use !important cautiously */
+}
+
+/* Remove default Looper theme background/colors that might interfere */
+body, .app-header, .app-aside, .app-main, .card, .metric {
+    background: none; /* Reset if Looper sets specific backgrounds */
+    /* Then re-apply our theme variables */
+}
+
+/* Re-apply after reset */
+body { background-color: var(--bg-color-light); color: var(--text-color-light); }
+body.dark-mode { background-color: var(--bg-color-dark); color: var(--text-color-dark); }
+
+.app-header { background-color: var(--header-bg-light); border-bottom: 1px solid var(--border-color-light); }
+body.dark-mode .app-header { background-color: var(--header-bg-dark); border-bottom-color: var(--border-color-dark); }
+
+.app-aside { background-color: var(--sidebar-bg-light); border-right: 1px solid var(--border-color-light); }
+body.dark-mode .app-aside { background-color: var(--sidebar-bg-dark); border-right-color: var(--border-color-dark); }
+
+.card { background-color: var(--surface-color-light); border: 1px solid var(--border-color-light); }
+body.dark-mode .card { background-color: var(--surface-color-dark); border-color: var(--border-color-dark); }
+
+.metric { background-color: var(--surface-color-light); border: 1px solid var(--border-color-light); }
+body.dark-mode .metric { background-color: var(--surface-color-dark); border-color: var(--border-color-dark); }
+
+.app-footer { background-color: var(--surface-color-light); border-top: 1px solid var(--border-color-light); }
+body.dark-mode .app-footer { background-color: var(--surface-color-dark); border-top-color: var(--border-color-dark); }
+
+
+/* Ensure Looper's hamburger styling doesn't conflict or adapt it */
+.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+  background-color: var(--text-color-light); /* Or a specific icon color */
+}
+body.dark-mode .hamburger-inner,
+body.dark-mode .hamburger-inner::before,
+body.dark-mode .hamburger-inner::after {
+  background-color: var(--text-color-dark);
+}

@@ -1,10 +1,11 @@
 const express = require('express')
+const path = require('path'); // Import the 'path' module
 const discord = require('./bot')
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 const fileUpload = require('express-fileupload');
-const config = require('./config/config.json')
+const config = require(path.join(__dirname, 'config', 'config.json')); // Use path.join for a more robust path
 
 const app = express();
 const http = require('http').Server(app);
@@ -24,7 +25,7 @@ require('./auth/passport')(passport);
 // Express session
 app.use(
     session({
-      secret: '4135231b7f33c66406cdb2a78420fa76',
+      secret: config.clientSecret,
       resave: true,
       saveUninitialized: true
     })

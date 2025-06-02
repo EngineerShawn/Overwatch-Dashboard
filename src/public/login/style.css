@@ -1,77 +1,210 @@
+:root {
+  /* Light Theme */
+  --bg-color-light: #f8f9fa; /* Very light gray */
+  --surface-color-light: #ffffff;
+  --text-color-light: #212529; /* Dark gray for text */
+  --text-muted-light: #6c757d; /* Muted text */
+  --accent-color-light: #5e72e4; /* Primary blue from main.css */
+  --accent-hover-light: #4a5cc7;
+  --shadow-color-light: rgba(0, 0, 0, 0.1);
+  --border-color-light: #dee2e6;
+  --alert-error-bg-light: #f8d7da;
+  --alert-error-text-light: #721c24;
+  --alert-error-border-light: #f5c6cb;
+  --alert-success-bg-light: #d4edda;
+  --alert-success-text-light: #155724;
+  --alert-success-border-light: #c3e6cb;
+
+  /* Dark Theme */
+  --bg-color-dark: #1a1a2e; /* Dark charcoal/navy */
+  --surface-color-dark: #2a2a3e; /* Slightly lighter dark */
+  --text-color-dark: #e0e0e0; /* Light gray for text */
+  --text-muted-dark: #a0a0a0;
+  --accent-color-dark: #7b61ff; /* Brighter purple for dark mode */
+  --accent-hover-dark: #6a50e0;
+  --shadow-color-dark: rgba(0, 0, 0, 0.3);
+  --border-color-dark: #3a3a4f;
+  --alert-error-bg-dark: #582123;
+  --alert-error-text-dark: #f8d7da;
+  --alert-error-border-dark: #721c24;
+  --alert-success-bg-dark: #1e4628;
+  --alert-success-text-dark: #d4edda;
+  --alert-success-border-dark: #155724;
+
+  /* Shared Variables */
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 16px;
+  --spacing-unit: 8px;
+  --font-family-sans: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --transition-duration: 0.3s;
+  --transition-timing: ease-in-out;
+}
+
+/* Apply theme variables */
+body {
+  font-family: var(--font-family-sans);
+  background-color: var(--bg-color-light);
+  color: var(--text-color-light);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  transition: background-color var(--transition-duration) var(--transition-timing), color var(--transition-duration) var(--transition-timing);
+}
+
+body.dark-mode {
+  background-color: var(--bg-color-dark);
+  color: var(--text-color-dark);
+}
+
 canvas {
   display: block;
   vertical-align: bottom;
 }
 
 #particles-js {
-  position: absolute;
+  position: fixed; /* Changed to fixed to ensure it stays as background */
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: #607D8B;
+  z-index: -1; /* Ensure it's behind content */
+  /* Gradient will be handled by body or a theme-specific overlay if needed */
+  /* background: linear-gradient(to right, #607D8B, #455A64); */
 }
 
-.text {
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  transform: translate(50%, -50%);
-  color: #CFD8DC;
-  max-width: 90%;
-  padding: 2em 3em;
-  background: rgba(0, 0, 0, 0.4);
-  text-shadow: 0px 0px 2px #131415;
-  font-family: "Open Sans", sans-serif;
+.login-container {
+  background-color: var(--surface-color-light);
+  color: var(--text-color-light);
+  padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 5);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 8px 24px var(--shadow-color-light);
+  text-align: center;
+  max-width: 450px;
+  width: 90%;
+  transition: background-color var(--transition-duration) var(--transition-timing), color var(--transition-duration) var(--transition-timing), box-shadow var(--transition-duration) var(--transition-timing);
+  z-index: 1; /* Ensure it's above particles-js */
 }
 
-h1 {
-  font-size: 2.25em;
-  font-weight: 700;
-  letter-spacing: -1px;
+body.dark-mode .login-container {
+  background-color: var(--surface-color-dark);
+  color: var(--text-color-dark);
+  box-shadow: 0 8px 24px var(--shadow-color-dark);
 }
 
-a,
-a:visited {
-  color: #e34234;
-  transition: 0.25s;
+.login-container img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  border: 3px solid var(--accent-color-light);
+  box-shadow: 0 4px 8px var(--shadow-color-light);
 }
 
-a:hover,
-a:focus {
-  color: #ba160c;
+body.dark-mode .login-container img {
+  border-color: var(--accent-color-dark);
+  box-shadow: 0 4px 8px var(--shadow-color-dark);
+}
+
+.login-container h1 {
+  font-size: 1.8em; /* Adjusted for better balance */
+  font-weight: 600;
+  margin-bottom: calc(var(--spacing-unit) * 1);
+  color: inherit; /* Inherits from .login-container */
+}
+
+.login-container h4 {
+  font-size: 1em;
+  font-weight: 400;
+  color: var(--text-muted-light);
+  margin-top: 0;
+  margin-bottom: calc(var(--spacing-unit) * 3);
+}
+
+body.dark-mode .login-container h4 {
+  color: var(--text-muted-dark);
+}
+
+.login-container a,
+.login-container a:visited {
+  color: var(--accent-color-light);
+  text-decoration: none;
+  transition: color var(--transition-duration) var(--transition-timing);
+}
+
+body.dark-mode .login-container a,
+body.dark-mode .login-container a:visited {
+  color: var(--accent-color-dark);
+}
+
+.login-container a:hover,
+.login-container a:focus {
+  color: var(--accent-hover-light);
+}
+
+body.dark-mode .login-container a:hover,
+body.dark-mode .login-container a:focus {
+  color: var(--accent-hover-dark);
 }
 
 .button {
-  border-radius: 4px;
-  background-color: #546E7A;
+  background-color: var(--accent-color-light);
+  color: #ffffff;
   border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 28px;
-  padding: 20px;
-  width: 200px;
-  transition: all 0.5s;
+  border-radius: var(--border-radius-md);
+  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
+  font-size: 1.1em;
+  font-weight: 600;
   cursor: pointer;
-  margin: 5px;
+  transition: background-color var(--transition-duration) var(--transition-timing), transform 0.2s var(--transition-timing), box-shadow var(--transition-duration) var(--transition-timing);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+body.dark-mode .button {
+  background-color: var(--accent-color-dark);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.button:hover, .button:focus {
+  background-color: var(--accent-hover-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+body.dark-mode .button:hover,
+body.dark-mode .button:focus {
+  background-color: var(--accent-hover-dark);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
 }
 
 .button span {
-  cursor: pointer;
   display: inline-block;
   position: relative;
-  transition: 0.5s;
+  transition: padding-right var(--transition-duration) var(--transition-timing);
 }
 
 .button span:after {
-  content: '\00bb';
+  content: '\f061'; /* FontAwesome arrow right */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
   position: absolute;
   opacity: 0;
-  top: 0;
+  top: 50%;
   right: -20px;
-  transition: 0.5s;
+  transform: translateY(-50%);
+  transition: opacity var(--transition-duration) var(--transition-timing), right var(--transition-duration) var(--transition-timing);
 }
 
 .button:hover span {
-  padding-right: 25px;
+  padding-right: calc(var(--spacing-unit) * 3);
 }
 
 .button:hover span:after {
@@ -79,47 +212,113 @@ a:focus {
   right: 0;
 }
 
-.centre {text-align: center;}
+.alert, .alert-success {
+  padding: calc(var(--spacing-unit) * 1.5);
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.9em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid transparent;
+}
 
-/* The alert message box */
 .alert {
-  padding: 20px;
-  background-color: #f44336; /* Red */
-  color: white;
-  margin-bottom: 15px;
+  background-color: var(--alert-error-bg-light);
+  color: var(--alert-error-text-light);
+  border-color: var(--alert-error-border-light);
 }
 
-/* The alert message box */
+body.dark-mode .alert {
+  background-color: var(--alert-error-bg-dark);
+  color: var(--alert-error-text-dark);
+  border-color: var(--alert-error-border-dark);
+}
+
 .alert-success {
-  padding: 20px;
-  background-color: #2E8B57; /* Green */
-  color: white;
-  margin-bottom: 15px;
+  background-color: var(--alert-success-bg-light);
+  color: var(--alert-success-text-light);
+  border-color: var(--alert-success-border-light);
 }
 
-/* The close button */
+body.dark-mode .alert-success {
+  background-color: var(--alert-success-bg-dark);
+  color: var(--alert-success-text-dark);
+  border-color: var(--alert-success-border-dark);
+}
+
 .closebtn {
-  margin-left: 15px;
-  color: white;
+  margin-left: calc(var(--spacing-unit) * 2);
+  color: inherit; /* Inherits from parent alert */
   font-weight: bold;
-  float: right;
-  font-size: 22px;
-  line-height: 20px;
+  font-size: 1.2em;
+  line-height: 1;
   cursor: pointer;
-  transition: 0.3s;
+  transition: opacity var(--transition-duration) var(--transition-timing);
+  background: none;
+  border: none;
+  padding: 0;
 }
 
-/* When moving the mouse over the close button */
 .closebtn:hover {
-  color: #CFD8DC;
+  opacity: 0.7;
 }
 
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 200px;
-  box-sizing: border-box;
-  background-color: #DDD;
-  border: 5px solid #cfd8dc;
+.theme-toggle-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: var(--surface-color-light);
+  color: var(--text-color-light);
+  border: 1px solid var(--border-color-light);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--shadow-color-light);
+  transition: all var(--transition-duration) var(--transition-timing);
+  z-index: 1000;
+}
+
+body.dark-mode .theme-toggle-button {
+  background-color: var(--surface-color-dark);
+  color: var(--text-color-dark);
+  border-color: var(--border-color-dark);
+  box-shadow: 0 2px 8px var(--shadow-color-dark);
+}
+
+.theme-toggle-button:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .login-container {
+    padding: calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 2.5);
+    margin-top: calc(var(--spacing-unit) * 2);
+    margin-bottom: calc(var(--spacing-unit) * 2);
+  }
+
+  .login-container h1 {
+    font-size: 1.6em;
+  }
+
+  .login-container h4 {
+    font-size: 0.9em;
+  }
+
+  .button {
+    font-size: 1em;
+    padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 2.5);
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .theme-toggle-button {
+    top: 10px;
+    right: 10px;
+  }
 }
